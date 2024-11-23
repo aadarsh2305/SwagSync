@@ -9,6 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use('/api/users', userRoutes);
 
+
 setupSwagger(app);
 
 const PORT = process.env.PORT || 3000;
