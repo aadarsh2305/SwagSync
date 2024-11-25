@@ -12,11 +12,14 @@ app.use('/api/users', userRoutes);
 
 setupSwagger(app);
 
-const PORT = process.env.PORT || 3000;
-
-sequelize.sync({ alter: true }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-    console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`);
+if (process.env.NODE_ENV !== 'test') {
+  const PORT = process.env.PORT || 3000;
+  sequelize.sync({ alter: true }).then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`Swagger docs: http://localhost:${PORT}/api-docs`);
+    });
   });
-});
+}
+
+module.exports = app; 
