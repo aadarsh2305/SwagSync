@@ -1,13 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const userRoutes = require('./routes/userRoutes');
+const vendorRoutes = require('./routes/vendorRoutes');
+const healthRoutes = require('./routes/healthRoutes')
 const sequelize = require('./utils/db');
 const setupSwagger = require('./utils/swagger');
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use('/api/users', userRoutes);
+app.use('/api/vendors', vendorRoutes);
+app.use('/api/health', healthRoutes);
 
 
 setupSwagger(app);
