@@ -1,5 +1,5 @@
 const express = require('express');
-const { getHealthCheck } = require('../controllers/healthController');
+const { getHealthStatus } = require('../controllers/healthController');
 
 const router = express.Router();
 
@@ -7,7 +7,7 @@ const router = express.Router();
  * @swagger
  * /api/health:
  *   get:
- *     summary: Perform a health check
+ *     summary: Health check for the API
  *     responses:
  *       200:
  *         description: API is healthy
@@ -18,10 +18,10 @@ const router = express.Router();
  *               properties:
  *                 status:
  *                   type: string
- *                   example: UP
+ *                   example: healthy
  *                 database:
  *                   type: string
- *                   example: CONNECTED
+ *                   example: connected
  *       500:
  *         description: API is unhealthy
  *         content:
@@ -31,13 +31,11 @@ const router = express.Router();
  *               properties:
  *                 status:
  *                   type: string
- *                   example: DOWN
+ *                   example: unhealthy
  *                 database:
  *                   type: string
- *                   example: DISCONNECTED
- *                 error:
- *                   type: string
+ *                   example: disconnected
  */
-router.get('/health', getHealthCheck);
+router.get('/', getHealthStatus);
 
 module.exports = router;
